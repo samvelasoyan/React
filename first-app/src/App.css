@@ -1,0 +1,108 @@
+*{
+  box-sizing: border-box;
+  color: rgb(70, 70, 70);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
+}
+#list{
+  width: 300px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+#head td{
+  opacity: 0.1;
+  transition: 200ms;
+  text-align: right;
+}
+#head td:hover{
+  opacity: 1;
+}
+#createTask{
+  outline: none;
+  padding: 1%;
+  border: 0;
+  border-bottom: 2px solid ;
+  background-color: transparent;
+  width: 100px;
+  
+}
+#addTask{
+  font-size: 13px;
+}
+table{
+  width: 100%;
+  padding: 0 10px;
+  border: 1px solid rgb(194, 194, 194);
+  background: linear-gradient(white, lightgray);
+  transition: 300ms
+}
+tr{
+  height: 35px;
+}
+th:first-child{
+  text-align: left;
+}
+th:last-child{
+  text-align: right;
+}
+#dropList{
+  text-decoration: none;
+  cursor: pointer;
+}
+.dropDown{
+  background: transparent;
+  padding-left: 20px;
+  transition: 300ms;
+  opacity: 1;
+  transition: height 0.3s
+}
+.drop{
+  animation-name: drop;
+  animation-duration: 300ms;
+  opacity: 1;
+}
+@keyframes drop{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+.icon{
+  width: 24px;
+}
+.icon a{
+  position: relative;
+}
+.icon:last-child{
+  float: right;
+  padding: 8px 0
+}
+.txt{
+  font-size: 13px;
+  text-decoration: none;
+  transition: 300ms;
+}
+.row{
+  position: relative;
+  height: 35px;
+}
+.fa-circle{
+  transform: scale(1);
+  transition: 300ms;
+}
+.fa-check-circle{
+  position: absolute;
+  left: 0;
+  top: 1px;
+  opacity: 0;
+  transition: 300ms;
+  color: green;
+}
+.checked .fa-check-circle{
+  opacity: 1;
+}
+.checked .txt{
+  color: green;
+  text-decoration: line-through;
+}
