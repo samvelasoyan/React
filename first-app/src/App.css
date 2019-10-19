@@ -1,6 +1,6 @@
 *{
   box-sizing: border-box;
-  color: rgb(70, 70, 70);
+  color: #464646;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
 }
 #list{
@@ -89,14 +89,14 @@ th:last-child{
 }
 .fa-circle{
   transform: scale(1);
-  transition: 300ms;
+  /* transition: 300ms; */
 }
 .fa-check-circle{
   position: absolute;
   left: 0;
-  top: 1px;
-  opacity: 0;
-  transition: 300ms;
+  transform: translateY(-50%);
+  /* opacity: 0; */
+  /* transition: 300ms; */
   color: green;
 }
 .checked .fa-check-circle{
@@ -105,4 +105,9 @@ th:last-child{
 .checked .txt{
   color: green;
   text-decoration: line-through;
+}
+[type = "submit"]{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
