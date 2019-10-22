@@ -1,0 +1,62 @@
+.App {
+  width: 400px;
+  height: auto;
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#content{
+  width: 100%;
+}
+button{
+  width: 370px;
+  height: 40px;
+  margin: 2px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  transition: 300ms;
+  outline: none;
+  background: #ffffff49;
+  color: #442c63;
+  border: 2px solid #ffffff00;
+  cursor: pointer;
+  overflow: hidden;
+}
+button:hover{
+  background: #ffffffbd;
+  color: #2c4763;
+  border-color: #ffffff00;
+} 
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 2px 15px;
+  width: 366px;
+  display: inline-block;
+  transition: 300ms;
+  border-radius: 5px;
+  border: 2px solid #ffffff00;
+  background: #ffffff49;
+  font-size: 15px;
+}
+li{
+  display: inline-block;
+  width: 354px;
+  height: auto;
+  padding: 5px;
+  transition: 300ms;
+  color: #442c63;
+  border-radius: 5px;
+}
+li:hover{
+  background-color: #ffffffbd;
+  color: #2c4763;
+}
+.fas{
+  animation: load 1s linear infinite;
+}
+@keyframes load {
+  from{transform: rotate(0deg)}
+  to{transform: rotate(360deg)}
+}
