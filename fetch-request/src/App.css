@@ -1,5 +1,5 @@
 .App {
-  width: 400px;
+  width: 700px;
   height: auto;
   position: absolute;
   top: 1%;
@@ -8,12 +8,25 @@
 }
 #content{
   width: 100%;
+  max-height: 690px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#content::-webkit-scrollbar{
+  width: 6px;
+  background-color: #ffffff49;
+  border-radius: 20px;
+}
+#content::-webkit-scrollbar-thumb{
+  height: 6px;
+  background-color: #ffffffbd;
+  border-radius: 20px;
 }
 button{
-  width: 370px;
-  height: 40px;
+  width: 675px;
+  height: 60px;
   margin: 2px 15px;
-  font-size: 20px;
+  font-size: 30px;
   border-radius: 5px;
   transition: 300ms;
   outline: none;
@@ -32,22 +45,23 @@ ul{
   list-style-type: none;
   padding: 0;
   margin: 2px 15px;
-  width: 366px;
+  width: 670px;
   display: inline-block;
   transition: 300ms;
   border-radius: 5px;
   border: 2px solid #ffffff00;
   background: #ffffff49;
-  font-size: 15px;
+  font-size: 25px;
 }
 li{
   display: inline-block;
-  width: 354px;
+  width: 98%;
   height: auto;
   padding: 5px;
   transition: 300ms;
   color: #442c63;
   border-radius: 5px;
+  cursor: default;
 }
 li:hover{
   background-color: #ffffffbd;
@@ -59,4 +73,30 @@ li:hover{
 @keyframes load {
   from{transform: rotate(0deg)}
   to{transform: rotate(360deg)}
+}
+span {
+  font-size: 20px;
+  text-decoration: underline;
+  float: right;
+  transition: 300ms;
+  padding: 2px;
+  border-radius: 5px;
+  margin-top: 6px;
+}
+span:hover{
+  color: #ffffffbd;
+  background-color: #2c4763;
+  cursor: pointer;
+}
+.info{
+  position: absolute;
+  width: 700px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffffe0;
+  padding: 5px 15px;
+  font-size: 30px;
+  border-radius: 5px;
+  color: #2c4763;
 }

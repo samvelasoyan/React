@@ -1,21 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
-
-function List({ id, title, body }) {
-    return (
-        <ul>
-            <li><b>id:</b> {id}</li>
-            <li><b>title:</b> {title.length > 43 ? `${title.slice(0, 43)}...` : title}</li>
-            <li><b>body:</b> {body.slice(0, 43)}...</li>
-        </ul>
-    );
-}
+import List from "./List"
+import Info from "./Info"
 
 class App extends Component {
     state = {
         arr: [],
         dataExists: false,
-        loading: false
+        loading: false,
+        info: {},
     };
 
     getData = () => {
@@ -24,7 +17,7 @@ class App extends Component {
             .then((resolve) => resolve.json())
             .then((resolve) =>
                 this.setState({
-                    arr: resolve.slice(0, 4),
+                    arr: resolve,
                     dataExists: !this.state.dataExists,
                     loading: false
                 })
@@ -35,8 +28,26 @@ class App extends Component {
     removeData = () => {
         this.setState({ arr: [], dataExists: !this.state.dataExists });
     };
+
+    showMore = (id) => {
+      let info = {
+        title: "",
+        body: "",
+      }
+      this.state.arr.map((item)=>{
+        if(item.id === id){
+          info.title = item.title;
+          info.body = item.body;
+          this.setState({info})
+        }
+      })
+    }
+    showLess = () => {
+      this.setState({info: {}})
+    }
     render() {
         return (
+          <Fragment>
             <div className="App">
                 <button
                     onClick={() => (this.state.dataExists ? this.removeData() : this.getData())}
@@ -46,11 +57,13 @@ class App extends Component {
                 <div id="content">
                     {this.state.arr.map((item, index) => {
                         return (
-                            <List {...item} key={index}/>
+                            <List {...item} key={index} showMore={()=>this.showMore(item.id)}/>
                         );
                     })}
                 </div>
             </div>
+            {typeof this.state.info.body === "string"? (<Info {...this.state.info} showLess={this.showLess}/>): null}
+          </Fragment>
         );
     }
 }
