@@ -37,7 +37,7 @@ table{
   padding: 0 10px;
   border: 1px solid rgb(194, 194, 194);
   background: linear-gradient(white, lightgray);
-  transition: 300ms
+  transition: 300ms;
 }
 tr{
   height: 35px;
@@ -54,10 +54,9 @@ th:last-child{
 }
 .dropDown{
   background: transparent;
-  padding-left: 20px;
   transition: 300ms;
   opacity: 0;
-  transition: opacity 0.3s
+  transition: opacity 0.3s;
 }
 .drop{
   animation-name: drop;
@@ -111,4 +110,20 @@ th:last-child{
   position: absolute;
   opacity: 0;
   cursor: pointer;
+}
+#items{
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  background: transparent;
+
+}
+#items::-webkit-scrollbar{
+  width: 6px;
+  background-color: lightgrey;
+}
+#items::-webkit-scrollbar-thumb{
+  height: 6px;
+  background-color: #ffffffbd;
 }

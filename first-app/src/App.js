@@ -1,25 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-
-function List({ value, deleteTask, completeTask, completed , opened}) {
-    return (
-            <tr className={`row ${completed? "checked" : ""}`}>
-                <td className="icon">
-                    <a href="#" onClick={completeTask}>
-                        <i className="far fa-circle"></i>
-                        <i className="far fa-check-circle"></i>
-                    </a>
-                </td>
-                <td className="txt">{value}</td>
-                <td className="icon">
-                    <a href="#" onClick={deleteTask}>
-                        <i className="fas fa-times"></i>
-                    </a>
-                </td>
-            </tr>
-        
-    );
-}
+import List from "./List"
 
 class App extends Component {
     state = {
@@ -88,22 +69,23 @@ class App extends Component {
                             </th>
                         </tr>
                     </table>
-                    <table className={`dropDown ${this.state.opened? "drop" : ""}`}>
-                        {this.state.list.map((item, index) => {
-                            return (
-                                <List
-                                    {...item}
-                                    key={index}
-                                    // value={item.value}
-                                    // id={item.id}
-                                    deleteTask={() => this.deleteTask(item.id)}
-                                    completeTask={() => this.completeTask(item.id)}
-                                    // completed={item.completed}
-                                    opened = {this.opened}
-                                />
-                            );
-                        })}
-                    </table>
+                    <div  id="items" className={`dropDown ${this.state.opened? "drop" : ""}`}>
+                        <table>
+                            {this.state.list.map((item, index) => {
+                                return (
+                                    <List
+                                        {...item}
+                                        key={index}
+                                        // value={item.value}
+                                        // id={item.id}
+                                        deleteTask={() => this.deleteTask(item.id)}
+                                        completeTask={() => this.completeTask(item.id)}
+                                        // completed={item.completed}
+                                    />
+                                );
+                            })}
+                        </table>
+                    </div>
                 </div>
             </form>
         );
