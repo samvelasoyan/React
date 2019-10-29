@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
 import Objects from "./Objects";
 import Box from "./Box";
@@ -7,6 +7,7 @@ import Form from "./Form";
 class App extends Component {
     state = {
         body: [],
+        edit: false,
     };
     postData = () => {
         Objects().map((item) => {
@@ -17,8 +18,6 @@ class App extends Component {
                 },
                 body: JSON.stringify(item)
             })
-                .then((response) => response.json()) // response.json() returns a promise
-                .then((response) => console.log(response));
         });
     };
 
@@ -31,19 +30,18 @@ class App extends Component {
     };
 
     putData = (id) => {
+      let arr = this.state.body.filter(item => item.id === id)
         fetch(`http://rest.learncode.academy/api/sam/friends/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify({ name: "Batman", age: "infinite" })
+            body: JSON.stringify(arr[0])
         })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
     };
     componentDidMount = () => {
         this.postData();
-        this.getData();
+        setTimeout(this.getData, 500)
     };
 
     changeName = (event) => {
@@ -91,6 +89,7 @@ class App extends Component {
     };
 
     edit = (event) => {
+      this.setState({edit: !this.state.edit})
       let id = event.target.id;
       let body = this.state.body;
         body.map((item) => {
@@ -101,27 +100,49 @@ class App extends Component {
         this.setState({ body });
     }
 
-    render = () => {
+    confirm = (event) =>{
+      let id = event.target.id;      
+      this.edit(event)
+      this.putData(id)
+    }
+    discard = (event) => {
+        this.getData()
+        this.edit(event)
+    }
+    render = () => {            
         return (
-            <div className="container">
+          <Fragment>
+            <div className="container" style={this.state.edit ? {opacity: 0} : {opacity: 1}}>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                    <th>Country</th>
+                    <th></th>
+                  </tr>
                 {this.state.body.map((item, index) => {
                     return (
-                      item.makeChanges? (
-                        <Form
-                            {...item}
-                            key={index}
-                            changeName={this.changeName}
-                            changeMail={this.changeMail}
-                            changePosition={this.changePosition}
-                            changeCountry={this.changeCountry}
-                            edit={this.edit}
-                        />
-                    ) : (
-                        <Box {...item} key={index} edit={this.edit}/>
-                    )
+                        <Box key={index} {...item} edit={this.state.edit? null : (this.edit)}/>
                   )
                 })}
+                </tbody>
+              </table>
             </div>
+              {this.state.body.map((item, index) => {
+                return(item.makeChanges && (<Form
+                    {...item}
+                    changeName={this.changeName}
+                    changeMail={this.changeMail}
+                    changePosition={this.changePosition}
+                    changeCountry={this.changeCountry}
+                    discard={this.discard}
+                    confirm={this.confirm}
+                    edit = {this.edit}
+                  />))
+                })}
+            </Fragment>
         );
     };
 }
