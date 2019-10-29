@@ -1,32 +1,31 @@
 import React from 'react';
 
-function Form({fullName, email, position, country, id, changeName, changeMail, changePosition, changeCountry, edit}){
+function Form({fullName, email, position, country, id, changeName, changeMail, changePosition, changeCountry, edit, discard, confirm}){
     return(
-        <div className="box" id={id}>
-            <span onClick={edit}><i id={id}  className="fas fa-times"></i></span>
-            <form>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Name:</td>
-                  <td><input id={id} type="text" name="name" value={fullName} onChange={changeName}/></td>  
-                </tr>
-                <tr>
-                  <td>Email:</td>
-                  <td><input id={id} type="email" name="email" value={email} onChange={changeMail}/></td>
-                </tr>
-                <tr>
-                  <td>Position:</td>
-                  <td><input id={id} type="text" name="position" value={position} onChange={changePosition}/></td>
-                </tr>
-                <tr>
-                  <td>Country:</td>
-                  <td><input id={id} type="text" name="country" value={country} onChange={changeCountry}/></td>
-                </tr>
-              </tbody>
-            </table>
-            </form>
-        </div>
+            <div className="box" id={id}>
+                <span onClick={discard}><i id={id}  className="fas fa-times"></i></span>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Name:</td>
+                      <td><input id={id} type="text" name="name" value={fullName} onChange={changeName} required/></td>  
+                    </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td><input id={id} type="email" name="email" value={email} onChange={changeMail} required/></td>
+                    </tr>
+                    <tr>
+                      <td>Position:</td>
+                      <td><input id={id} type="text" name="position" value={position} onChange={changePosition} required/></td>
+                    </tr>
+                    <tr>
+                      <td>Country:</td>
+                      <td><input id={id} type="text" name="country" value={country} onChange={changeCountry} required/></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button id={id} onClick={confirm}>Confirm Changes</button>
+            </div>
     )
 }
 
