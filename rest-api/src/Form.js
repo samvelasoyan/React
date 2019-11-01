@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Form({fullName, email, position, country, id, changeName, changeMail, changePosition, changeCountry, edit, discard, confirm}){
+function Form({fullName, email, position, country, id, changeName, changeMail, changePosition, changeCountry, remove, discard, confirm}){
     return(
             <div className="box" id={id}>
-                <span onClick={discard}><i id={id}  className="fas fa-times"></i></span>
+              <form>
                 <table>
                   <tbody>
                     <tr>
@@ -24,7 +24,9 @@ function Form({fullName, email, position, country, id, changeName, changeMail, c
                     </tr>
                   </tbody>
                 </table>
-                <button id={id} onClick={confirm}>Confirm Changes</button>
+                <button type="submit" id={id} onClick={confirm}><i id={id} className="fas fa-user-check"></i></button>
+                <button id={id} onClick={discard}><i id={id} className="fas fa-user-times"></i></button>
+              </form>
             </div>
     )
 }
