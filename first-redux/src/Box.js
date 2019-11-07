@@ -8,8 +8,8 @@ function Box({ name, email, company, remove, address, id, edit }) {
             <td>{company.name}</td>
             <td>{address.city}</td>
             <td>
-                <span onClick={edit}><i id={id} className="fas fa-user-edit"></i></span>
-                <span onClick={remove}><i id={id} className="fas fa-user-times"></i></span>
+                <span onClick={edit}><i id={id} className="fas fa-pen"></i></span>
+                <span onClick={remove}><i id={id} className="fas fa-times-circle"></i></span>
             </td>
         </tr>
     );

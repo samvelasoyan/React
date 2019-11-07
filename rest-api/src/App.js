@@ -21,7 +21,7 @@ class App extends Component {
         });
     };
 
-    getData = (x) => {
+    getData = () => {
         fetch("http://rest.learncode.academy/api/sam/friends")
             .then((resolve) => resolve.json())
             .then((resolve) => this.setState({ body: resolve.slice(-this.state.body.length) }))
@@ -109,7 +109,6 @@ class App extends Component {
         this.setState({ body });
         this.postData();
         this.getData();
-        
     };
 
     confirm = (event) => {
