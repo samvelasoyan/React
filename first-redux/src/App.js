@@ -1,54 +1,44 @@
-import React, { Component } from "react";
-// import { createStore, applyMiddleware, combineReducers } from 'redux';
-// import thunk from 'redux-thunk';
-import "./App.css";
-import Box from "./Box";
-// import reducer from './reducers/index'
-import { getUserDataAction } from './actions/index';
+import React, { Component, Fragment } from "react";
+import "./styles/App.css";
+import Box from "./components/Box.js";
+import Form from './components/Form.js';
+import Front from './components/Front.js';
+import { postUserDataAction, getUserDataAction, addUserAction, editAction } from './actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 
 class App extends Component {
 
-    // remove = (e) => {
-    //     let id = e.target.id;
-    //     let body = this.state.body.filter((item) => item.id !== id);
-    //     this.setState({ body });
-    // };
-
-    // showUsers = () => {
-    //     console.log(this.store.getState().getData, 'showUsers')
-    //     this.setState({ body: this.store.getState().getData })
-    // }
+    addUser = () => {
+      this.props.addUserAction()
+      this.props.getUserDataAction()
+    }
 
     componentDidMount() {
-        this.props.getUserDataAction()
+      this.props.postUserDataAction()
     }
 
     render() {
-        // console.log(this.store.getState().getData, 'render');
-        // this.store.subscribe(() => {
-        //     this.showUsers()
-        //     console.log(this.store.getState().getData, 'subscribe')
-        // })
-        console.log(this.props.body);
-        
         return (
+          <Fragment>
             <div
                 className="container"
-            // style={this.state.edit ? { opacity: 0 } : { opacity: 1 }}
+                style={this.props.data.edit ? { opacity: 0 } : { opacity: 1 }}
             >
-                <table>
+                {!this.props.data.body.length>0 ? (<Front showUsers={this.props.getUserDataAction}/>):
+                  (<table>
                     <tbody>
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Company</th>
-                            <th>City</th>
-                            <th><span><i className="fas fa-user-plus"></i></span></th>
+                            <th>Position</th>
+                            <th>Country</th>
+                            <th>
+                              <span onClick={()=>this.addUser('','','','')}><i className="fas fa-user-plus"></i></span>
+                              </th>
                         </tr>
-                        {this.props.body.length>0 && this.props.body.map((item, index) => {
+                        {this.props.data.body.length>0 && this.props.data.body.map((item, index) => {
                             return (
                                 <Box
                                     key={index}
@@ -58,20 +48,31 @@ class App extends Component {
                             );
                         })}
                     </tbody>
-                </table>
+                </table>)}
             </div>
+            {this.props.data.body.length>0 && this.props.data.body.map((item, index) => {
+              return (
+                  item.makeChanges && (
+                      <Form
+                          key={index}
+                          {...item}
+                      />
+                  )
+              )
+          })}
+          </Fragment>
         );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        body: state.getData
+        data: state.getData
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getUserDataAction},dispatch);
+    return bindActionCreators({getUserDataAction, postUserDataAction, addUserAction, editAction},dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
