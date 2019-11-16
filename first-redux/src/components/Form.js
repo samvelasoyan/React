@@ -31,8 +31,8 @@ function Form({
         return getUserDataAction(), editAction(e.target.id);
     };
     const confirm = (e) => {
-        return addUserAction(fullName, email, position, country), editAction(e.target.id)
-    }
+        return addUserAction(fullName, email, position, country), editAction(e.target.id);
+    };
     return (
         <div className="box" id={id}>
             <form onSubmit={(e) => e.preventDefault()}>
@@ -100,10 +100,21 @@ function Form({
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit" id={id} onClick={(e) => confirm(e)}>
+                <button
+                    type="submit"
+                    id={id}
+                    onClick={(e) => confirm(e)}
+                    className={(fullName === undefined || fullName === "") && "disabled"}
+                    disabled={fullName === undefined || fullName === ""}
+                >
                     <i id={id} className="fas fa-check-circle"></i> Confirm
                 </button>
-                <button id={id} onClick={(e) => discard(e)}>
+                <button
+                    id={id}
+                    onClick={(e) => discard(e)}
+                    className={(fullName === undefined || fullName === "") && "disabled"}
+                    disabled={fullName === undefined || fullName === ""}
+                >
                     <i id={id} className="fas fa-times-circle"></i> Discard
                 </button>
             </form>

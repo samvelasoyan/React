@@ -22,11 +22,11 @@ export const addUserAction = (fullName, email, position, country) => dispatch =>
   }) 
 }
 
-export const getUserDataAction = () => dispatch => {
+export const getUserDataAction = () => (dispatch, getState) => {
     return axios.get('http://rest.learncode.academy/api/sam/friends')
             .then(res => {
               const data = res.data
-              const body = Array.from(new Set(data.map(item => item.fullName))).map(fullName => {
+              const body = Array.from(new Set(data.map(item => item.fullName)),(fullName => {
                 let obj = data.find(s => s.fullName === fullName)
                   return {
                     id: obj.id,
@@ -35,6 +35,12 @@ export const getUserDataAction = () => dispatch => {
                     position: obj.position,
                     country: obj.country,
                     makeChanges: obj.makeChanges,
+                  }
+                }))
+                body.map(item => {
+                  if(item.fullName === undefined){
+                    item.makeChanges = !item.makeChanges
+                    getState().getData.edit = !getState().getData.edit
                   }
                 })
               console.log(body)

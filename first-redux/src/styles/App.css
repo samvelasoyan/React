@@ -138,6 +138,16 @@ input:hover{
   background: white;
   color: #0004ff9f;
 }
+.box .disabled{
+  background: white;
+  color: #0004ff9f;
+  cursor: default;
+  opacity: 0.5;
+}
+.box .disabled:hover{
+  background: white;
+  color: #0004ff9f;
+}
 .box span{
   position: absolute;
   right: 5px;
